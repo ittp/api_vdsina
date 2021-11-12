@@ -1,0 +1,7 @@
+{
+  "account": {
+    "balance": { method: "get", request: "account.balance", values: "balance" }
+        "server": { method: "get", request: "server", values: []}
+
+  }
+}
