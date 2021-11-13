@@ -50,6 +50,6 @@ jobs:
       run: echo "Hello ${{ github.event.inputs.name }} - ${{ github.event.inputs.server }}"
     - name: Balance
       run: | 
-        curl -X GET -H 'Authorization: ${{github.secrets.API_TOKEN}}' https://userapi.vdsina.ru/account.balance > ~/balance.json
+        curl -X GET -H 'Authorization: ${{github.secrets.API_TOKEN}}' ${{github.secrets.URL}}/account.balance > ~/balance.json
         cat ~/balance.json
 
