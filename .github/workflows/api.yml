@@ -1,7 +1,8 @@
 # This is a basic workflow that is manually triggered
 
 name: API
-
+env:
+  TOKEN: ${{ secrets.API_TOKEN }}
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
@@ -54,16 +55,19 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Send greeting
+    
       run: echo "Hello ${{ github.event.inputs.name }} - ${{ github.event.inputs.server }}"
-    - name: Balance
+    - name: Account Balance
+      env: 
+        TOKEN: ${{ secrets.API_TOKEN }}
       run: | 
-        curl -X GET -H 'Authorization: ${{ github.event.inputs.token }}' https://userapi.vdsina.ru/v1/account.balance > ~/balance.json
+        curl -X GET -H 'Authorization: ${TOKEN}' https://userapi.vdsina.ru/v1/account.balance > ~/balance.json
         cat ~/balance.json
-    - name: Server
-      run: | 
-        curl -X GET -H 'Authorization: ${{github.event.inputs.token }}' https://userapi.vdsina.ru/v1/server > ~/server.json
-        cat ~/server.json
-    - name: DNS
-      run: | 
-        curl -X GET -H 'Authorization: ${{ github.event.inputs.token }}' https://userapi.vdsina.ru/v1/dns > ~/dns.json
-        cat ~/dns.json
+#     - name: Server
+#       run: | 
+#         curl -X GET -H 'Authorization: ${{github.event.inputs.token }}' https://userapi.vdsina.ru/v1/server > ~/server.json
+#         cat ~/server.json
+#     - name: DNS
+#       run: | 
+#         curl -X GET -H 'Authorization: ${{ github.event.inputs.token }}' https://userapi.vdsina.ru/v1/dns > ~/dns.json
+#         cat ~/dns.json
