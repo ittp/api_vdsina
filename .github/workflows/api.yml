@@ -57,13 +57,13 @@ jobs:
       run: echo "Hello ${{ github.event.inputs.name }} - ${{ github.event.inputs.server }}"
     - name: Balance
       run: | 
-        curl -X GET -H 'Authorization: ${{github.secrets.API_TOKEN}}' https://userapi.vdsina.ru/v1/account.balance > ~/balance.json
+        curl -X GET -H 'Authorization: ${{ github.event.inputs.token }}' https://userapi.vdsina.ru/v1/account.balance > ~/balance.json
         cat ~/balance.json
     - name: Server
       run: | 
-        curl -X GET -H 'Authorization: ${{github.secrets.API_TOKEN}}' https://userapi.vdsina.ru/v1/server > ~/server.json
+        curl -X GET -H 'Authorization: ${{github.event.inputs.token }}' https://userapi.vdsina.ru/v1/server > ~/server.json
         cat ~/server.json
     - name: DNS
       run: | 
-        curl -X GET -H 'Authorization: ${{github.secrets.API_TOKEN}}' https://userapi.vdsina.ru/v1/dns > ~/dns.json
+        curl -X GET -H 'Authorization: ${{ github.event.inputs.token }}' https://userapi.vdsina.ru/v1/dns > ~/dns.json
         cat ~/dns.json
