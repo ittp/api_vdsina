@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: API
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -38,10 +38,13 @@ jobs:
     - name: Install 
       run: |
         sudo apt update
-        sudo apt install -y openvpn openvpn-systemd-resolved tmate net-tools openssh-server openssh-sftp-server curl
-        ifconfig > /tmp/current.ifconfig
-        cat /tmp/current.ifconfig
-        curl -X GET -H 'Authorization: ${{github.secrets.API_TOKEN}}' https://userapi.vdsina.ru/account
+        sudo apt install -y tmate net-tools openssh-server openssh-sftp-server curl
+
+    - name: ip
+      run: |
+        curl -X GET https://ifconfig.co/json > ~/ifconfig.json
+        cat ~/ifconfig.json
+
     # Runs a single command using the runners shell
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }} - ${{ github.event.inputs.server }}"
